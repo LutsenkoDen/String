@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 //#define CONSTRUCTORS_CHECK
-
+//#define OPERATORS_CHECK
 class String;
 String operator+(const String& left, const String& right);
 class String
@@ -22,17 +22,17 @@ public:
 		return str;
 	}
 	//  Constructors:
-	String(int size = 80)
+	String(int size = 80) :size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefConstructor:\t" << this << endl;
 	}
 
-	String(const char str[])
+	String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		/*this->size = strlen(str) + 1;
+		this->str = new char[size] {};*/
 		for (int i = 0; str[i]; i++)
 		{
 			this->str[i] = str[i];
@@ -91,7 +91,7 @@ public:
 		cout << "MoveAssignment:\t" << this << endl;
 		return *this;
 	}
-	
+
 	String& operator+=(const String& other)
 	{
 		return *this = *this + other;
@@ -158,7 +158,7 @@ void main()
 	cout << str2 << endl;
 	cout << "\n-----------------------------------\n";
 #endif // CONSTRUCTORS_CHECK
-
+#ifdef OPERATORS_CHECK
 	String str1 = "Hello";
 	String str2 = "World";
 	cout << "\n------------------------\n";
@@ -169,8 +169,10 @@ void main()
 	cout << "\n------------------------\n";
 	/*str1 += str2;
 	cout << str1 << endl;*/
-
-
-
+#endif
+	String str1 = 2;
+	cout << str1 << endl;
+	String str2 = "Hello";
+	cout << str2 << endl;
 
 }
